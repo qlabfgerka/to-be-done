@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   public get isLoggedIn(): boolean {
-    return this.getJWTToken() !== '';
+    return this.getJWTToken() !== '' && this.getJWTToken() !== null;
   }
 
   public getUserID(): string {
