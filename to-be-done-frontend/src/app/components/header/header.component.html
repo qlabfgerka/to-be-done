@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+  <span class="pointer" [routerLink]="''">To Be Done</span>
+  <span class="spacer"></span>
+  <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
