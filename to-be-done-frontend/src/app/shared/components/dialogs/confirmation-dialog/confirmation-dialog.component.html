@@ -1,0 +1,17 @@
+<mat-dialog-content>
+  <h1>{{ title }}</h1>
+  <h3>{{ subtitle }}</h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-button
+    [mat-dialog-close]="confirmButton"
+    cdkfocusinital
+    color="warn"
+  >
+    {{ confirmButton }}
+  </button>
+  <button mat-button [mat-dialog-close]="cancelButton" cdkfocusinital>
+    {{ cancelButton }}
+  </button>
+</mat-dialog-actions>
