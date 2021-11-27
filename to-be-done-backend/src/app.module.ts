@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './controllers/user/auth/auth.module';
 import { ProjectModule } from './controllers/project/project.module';
+import { TaskModule } from './controllers/task/task.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProjectModule } from './controllers/project/project.module';
     }),
     AuthModule,
     ProjectModule,
+    TaskModule,
   ],
   controllers: [],
   providers: [],

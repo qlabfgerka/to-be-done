@@ -1,13 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { User } from '../user/user.model';
-import { Task } from '../task/task.model';
 import * as mongoose from 'mongoose';
 
-export type ProjectDocument = Project & Document;
+export type TaskDocument = Task & Document;
 
 @Schema()
-export class Project {
+export class Task {
   id?: string | undefined | null = null;
 
   @Prop()
@@ -16,11 +15,17 @@ export class Project {
   @Prop()
   description: string;
 
+  @Prop()
+  dueDate?: Date | undefined | null;
+
+  @Prop()
+  completed: Boolean;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   owner: User;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }] })
-  tasks: Task[];
+  /*@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }] })
+  lists: List[];*/
 }
 
-export const ProjectSchema = SchemaFactory.createForClass(Project);
+export const TaskSchema = SchemaFactory.createForClass(Task);
