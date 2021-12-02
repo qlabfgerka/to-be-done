@@ -1,0 +1,38 @@
+<div *ngIf="subtaskForm">
+  <mat-dialog-content>
+    <form class="form" [formGroup]="subtaskForm" (ngSubmit)="createSubtask()">
+      <h1>Create subtask</h1>
+      <mat-form-field class="wide" appearance="fill">
+        <mat-label>Add subtask title</mat-label>
+        <input
+          matInput
+          placeholder="Example Login/registration system"
+          formControlName="title"
+        />
+        <mat-error *ngIf="errorControl.title.errors?.required">
+          Please enter a title.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="wide" appearance="fill">
+        <mat-label>Add subtask description</mat-label>
+        <textarea
+          matInput
+          placeholder="Example create a login and registration system..."
+          formControlName="description"
+          cdkTextareaAutosize
+        ></textarea>
+        <mat-error *ngIf="errorControl.description.errors?.required">
+          Please enter a subtitle.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-button type="submit" [disabled]="!subtaskForm.valid">
+        CREATE
+      </button>
+      <button mat-button type="button" color="warn" mat-dialog-close>
+        CANCEL
+      </button>
+    </form>
+  </mat-dialog-content>
+</div>

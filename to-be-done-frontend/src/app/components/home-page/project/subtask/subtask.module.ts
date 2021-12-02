@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProjectRoutingModule } from './project-routing.module';
-import { ProjectComponent } from './project.component';
+import { SubtaskRoutingModule } from './subtask-routing.module';
+import { SubtaskComponent } from './subtask.component';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationDialogModule } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.module';
 import { CreateTaskDialogModule } from 'src/app/shared/components/dialogs/create-task-dialog/create-task-dialog.module';
-import { SubtaskComponent } from './subtask/subtask.component';
+import { CreateSubtaskDialogModule } from 'src/app/shared/components/dialogs/create-subtask-dialog/create-subtask-dialog.module';
 
 
 @NgModule({
-  declarations: [
-    ProjectComponent,
-    SubtaskComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
-    ProjectRoutingModule,
+    SubtaskRoutingModule,
     MatTableModule,
     MatButtonModule,
-    CreateTaskDialogModule,
-    ConfirmationDialogModule
+    CreateSubtaskDialogModule,
+    ConfirmationDialogModule    
   ]
 })
-export class ProjectModule { }
+export class SubtaskModule { }

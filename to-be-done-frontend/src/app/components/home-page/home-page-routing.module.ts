@@ -9,6 +9,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./project/project.module').then((m) => m.ProjectModule),
   },
+
+  {
+    path: `subtask/:id`,
+    loadChildren: () =>
+      import('./project/subtask/subtask.module').then((m) => m.SubtaskModule),
+  },
 ];
 
 @NgModule({

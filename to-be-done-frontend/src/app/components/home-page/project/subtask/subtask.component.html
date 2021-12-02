@@ -1,6 +1,6 @@
 <div class="flexbox margin-top">
-    <button mat-raised-button color="primary" (click)="createTask()">
-      CREATE TASK
+    <button mat-raised-button color="primary" (click)="createSubtask()">
+      CREATE SUBTASK
     </button>
     <div class="break"></div>
 
@@ -30,24 +30,11 @@
         <td mat-cell *matCellDef="let element">{{ element.completed }}</td>
       </ng-container>
   
-      <ng-container matColumnDef="enter">
-        <th mat-header-cell *matHeaderCellDef>ENTER</th>
-        <td mat-cell *matCellDef="let element" class="short">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="enterTask(element.id)"
-          >
-            ENTER TASK
-          </button>
-        </td>
-      </ng-container>
-  
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>EDIT</th>
         <td mat-cell *matCellDef="let element" class="short">
-          <button mat-raised-button color="accent" (click)="editTask(element)">
-            EDIT TASK
+          <button mat-raised-button color="accent" (click)="editSubtask(element)">
+            EDIT SUBTASK
           </button>
         </td>
       </ng-container>
@@ -58,9 +45,9 @@
           <button
             mat-raised-button
             color="warn"
-            (click)="deleteTask(element.id)"
+            (click)="deleteSubtask(element.id)"
           >
-            REMOVE TASK
+            REMOVE SUBTASK
           </button>
         </td>
       </ng-container>

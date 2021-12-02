@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Project } from 'src/models/project/project.model';
 import { User, UserDocument } from 'src/models/user/user.model';
 import { Task, TaskDocument } from 'src/models/task/task.model';
+import { Subtask, SubtaskDocument } from 'src/models/subtask/subtask.model';
 
 @Injectable()
 export class DtoFunctionsService {
@@ -12,6 +13,8 @@ export class DtoFunctionsService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Task.name)
     private readonly taskModel: Model<TaskDocument>,
+    @InjectModel(Subtask.name)
+    private readonly subtaskModel: Model<SubtaskDocument>,
   ) {}
 
   public userToDTO(user: User): User {
@@ -37,14 +40,24 @@ export class DtoFunctionsService {
   }
 
   public async taskToDTO(task: Task): Promise<Task> {
+
+    console.log(task);
+
     if (!task) return undefined;
+
+    const subtasks = [];
+    for(const subtask of task.subtasks) {
+      subtasks.push(await this.subtaskToDTO(await this.subtaskModel.findById(subtask)));
+    }
+
     const taskDTO: Task = {
       id: task.id,
       title: task.title,
       description: task.description,
       dueDate: task.dueDate,
       completed: task.completed,
-      owner: this.userToDTO(await this.getUser(task.owner))
+      owner: this.userToDTO(await this.getUser(task.owner)),
+      subtasks: subtasks
     };
 
     return taskDTO;
@@ -93,6 +106,40 @@ export class DtoFunctionsService {
     if (!user) return undefined;
     if (user.nickname) return await this.userModel.findById(user.id);
     return await this.userModel.findById(user.toString());
+  }
+
+  /*
+  public async getTask(task: Task): Promise<Task> {
+    if (!task) return undefined;
+    if (task.id) return await this.taskModel.findById(task.id);
+    return await this.taskModel.findById(task.toString());
+  }
+
+  */
+
+  public async subtaskToDTO(subtask: Subtask): Promise<Subtask> {
+    if (!subtask) return undefined;
+    const subtaskDTO: Subtask = {
+      id: subtask.id,
+      title: subtask.title,
+      description: subtask.description,
+      dueDate: subtask.dueDate,
+      completed: subtask.completed,
+      owner: this.userToDTO(await this.getUser(subtask.owner)) // task more bit owner subtaska task
+      
+    };
+
+    return subtaskDTO;
+  }
+
+  public async subtasksToDTO(subtasks: Array<Subtask>): Promise<Array<Subtask>> {
+    const subtasksDTO = new Array<Subtask>();
+
+    for (const subtask of subtasks) {
+      subtasksDTO.push(await this.subtaskToDTO(subtask));
+    }
+
+    return subtasksDTO;
   }
 
   

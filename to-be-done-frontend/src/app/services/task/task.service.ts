@@ -22,6 +22,10 @@ export class TaskService {
     return this.httpClient.get<Array<TaskDTO>>(`${this.hostname}/task?projectId=${projectId}`);
   }
 
+  public getTask(id: string): Observable<TaskDTO> {
+    return this.httpClient.get<TaskDTO>(`${this.hostname}/task/${id}`);
+  }
+
   public deleteTask(id: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.hostname}/task/${id}`);
   }
