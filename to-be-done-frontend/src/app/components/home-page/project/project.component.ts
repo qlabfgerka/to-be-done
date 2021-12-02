@@ -42,23 +42,6 @@ export class ProjectComponent implements OnInit {
     this.refreshProject();
   }
 
-  private refreshProject(): void {
-    this.route.paramMap
-      .pipe(
-        take(1),
-        mergeMap((paramMap) =>
-          this.projectService.getProject(paramMap.get('id'))
-        )
-      )
-      .subscribe((project: ProjectDTO) => {
-        this.tasks = project.tasks;
-        this.dataSource = new MatTableDataSource(project.tasks);
-        this.project = project;
-        console.log(project);
-      });
-  }
-
-
   public createTask(): void {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent);
 
@@ -74,7 +57,6 @@ export class ProjectComponent implements OnInit {
       }
     });
   }
-
 
   public editTask(task: TaskDTO): void {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
@@ -92,7 +74,6 @@ export class ProjectComponent implements OnInit {
             const index = this.tasks.indexOf(
               this.tasks.find((p) => p.id === task.id)
             );
-            console.log("task:", task);
 
             if (index > -1) {
               this.tasks[index] = task;
@@ -120,7 +101,7 @@ export class ProjectComponent implements OnInit {
           .pipe(take(1))
           .subscribe(() => {
             const index = this.tasks.indexOf(
-              this.tasks.find(task => task.id === id)
+              this.tasks.find((task) => task.id === id)
             );
 
             if (index > -1) {
@@ -130,5 +111,20 @@ export class ProjectComponent implements OnInit {
           });
       }
     });
+  }
+
+  private refreshProject(): void {
+    this.route.paramMap
+      .pipe(
+        take(1),
+        mergeMap((paramMap) =>
+          this.projectService.getProject(paramMap.get('id'))
+        )
+      )
+      .subscribe((project: ProjectDTO) => {
+        this.tasks = project.tasks;
+        this.dataSource = new MatTableDataSource(project.tasks);
+        this.project = project;
+      });
   }
 }

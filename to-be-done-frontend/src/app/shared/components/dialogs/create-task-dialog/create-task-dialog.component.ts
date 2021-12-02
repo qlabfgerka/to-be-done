@@ -27,6 +27,7 @@ export class CreateTaskDialogComponent implements OnInit {
         this.task ? this.task.description : '',
         [Validators.required],
       ],
+      deadline: [this.task ? this.task.dueDate : '', [Validators.required]]
     });
   }
 
@@ -37,7 +38,7 @@ export class CreateTaskDialogComponent implements OnInit {
         title: this.taskForm.get('title').value,
         id: this.task && this.task.id ? this.task.id : null,
         completed: false,
-        dueDate: new Date()
+        dueDate: this.taskForm.get('deadline').value
       };
 
       this.dialogRef.close(task);

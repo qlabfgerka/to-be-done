@@ -27,6 +27,23 @@
         </mat-error>
       </mat-form-field>
 
+      <mat-form-field class="wide" appearance="fill">
+        <mat-label>Choose a deadline</mat-label>
+        <input
+          matInput
+          [matDatepicker]="deadlinePicker"
+          formControlName="deadline"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="deadlinePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #deadlinePicker></mat-datepicker>
+        <mat-error *ngIf="errorControl.description.errors?.required">
+          Please enter a deadline.
+        </mat-error>
+      </mat-form-field>
+
       <button mat-button type="submit" [disabled]="!taskForm.valid">
         CREATE
       </button>
