@@ -5,13 +5,13 @@ import { Project, ProjectSchema } from 'src/models/project/project.model';
 import { DtoFunctionsModule } from 'src/services/dto-functions/dto-functions.module';
 import { User, UserSchema } from 'src/models/user/user.model';
 import { Task, TaskSchema } from 'src/models/task/task.model';
-import { TaskService } from './task.service';
-import { TaskController } from './task.controller';
+import { SubtaskService } from './subtask.service';
+import { SubtaskController } from './subtask.controller';
 import { Subtask, SubtaskSchema } from 'src/models/subtask/subtask.model';
 
 @Module({
-  providers: [TaskService],
-  controllers: [TaskController],
+  providers: [SubtaskService],
+  controllers: [SubtaskController],
   imports: [
     MongooseModule.forFeature([
       { name: Project.name, schema: ProjectSchema },
@@ -22,4 +22,6 @@ import { Subtask, SubtaskSchema } from 'src/models/subtask/subtask.model';
     DtoFunctionsModule,
   ],
 })
-export class TaskModule {}
+export class SubtaskModule {}
+
+//tu nisem ziher zato ker more bit subtask znotraj taska

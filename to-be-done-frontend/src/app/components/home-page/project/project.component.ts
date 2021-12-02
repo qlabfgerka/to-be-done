@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { CreateTaskDialogComponent } from 'src/app/shared/components/dialogs/create-task-dialog/create-task-dialog.component';
 import { UserDTO } from 'src/app/models/user/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -35,7 +36,8 @@ export class ProjectComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly route: ActivatedRoute,
     private readonly projectService: ProjectService,
-    private readonly taskService: TaskService
+    private readonly taskService: TaskService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +67,8 @@ export class ProjectComponent implements OnInit {
       },
     });
 
+    
+
     dialogRef.afterClosed().subscribe((task: TaskDTO) => {
       if (task) {
         this.taskService
@@ -82,6 +86,15 @@ export class ProjectComponent implements OnInit {
           });
       }
     });
+  }
+
+  public enterTask(id: string): void {
+
+    //this.router.navigate([`project/${this.project.id}/subtask/${id}`]);
+
+    //console.log(this.project.id + " " +id);
+
+    this.router.navigate([`/subtask/${id}`]);
   }
 
   public deleteTask(id: string): void {

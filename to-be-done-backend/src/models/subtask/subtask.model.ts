@@ -2,12 +2,12 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { User } from '../user/user.model';
 import * as mongoose from 'mongoose';
-import { Subtask } from '../subtask/subtask.model';
+import { Task } from '../task/task.model';
 
-export type TaskDocument = Task & Document;
+export type SubtaskDocument = Subtask & Document;
 
 @Schema()
-export class Task {
+export class Subtask {
   id?: string | undefined | null = null;
 
   @Prop()
@@ -25,8 +25,10 @@ export class Task {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   owner: User;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }] })
-  subtasks: Subtask[];
+  //owner je task id
+
+  /*@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }] })
+  lists: List[];*/
 }
 
-export const TaskSchema = SchemaFactory.createForClass(Task);
+export const SubtaskSchema = SchemaFactory.createForClass(Subtask);
