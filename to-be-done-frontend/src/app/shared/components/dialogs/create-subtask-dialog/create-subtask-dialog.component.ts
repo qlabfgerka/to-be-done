@@ -29,12 +29,15 @@ export class CreateSubtaskDialogComponent implements OnInit {
         this.subtask ? this.subtask.description : '',
         [Validators.required],
       ],
+      deadline: [
+        this.subtask ? this.subtask.dueDate : '',
+        [Validators.required],
+      ],
     });
   }
 
   public createSubtask(): void {
-
-    console.log("mela");
+    console.log('mela');
 
     if (this.subtaskForm.valid) {
       const subtask: SubtaskDTO = {
@@ -42,7 +45,7 @@ export class CreateSubtaskDialogComponent implements OnInit {
         title: this.subtaskForm.get('title').value,
         id: this.subtask && this.subtask.id ? this.subtask.id : null,
         completed: false,
-        dueDate: new Date()
+        dueDate: this.subtaskForm.get('deadline').value,
       };
 
       this.dialogRef.close(subtask);
